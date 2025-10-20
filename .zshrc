@@ -171,11 +171,12 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-alias ls='lsd'
-alias l='lsd -l'
-alias la='lsd -Al'
-alias lt='lsd --tree'
-alias lc='eza -lg --icons --group-directories-first --sort=Name --time-style=long-iso'
-alias lca='eza -alg --icons --group-directories-first --sort=Name --time-style=long-iso'
+alias ls='eza'
+alias lc='lsd -l'
+alias lca='lsd -Al'
+alias lct='lsd --tree'
+alias l='eza -lg --icons --group-directories-first --sort=Name --time-style=long-iso'
+alias la='eza -alg --icons --group-directories-first --sort=Name --time-style=long-iso'
+alias lt='eza -lg --icons --group-directories-first --sort=Name --time-style=long-iso --tree'
 
 bindkey "^U" backward-kill-line
