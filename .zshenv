@@ -11,3 +11,8 @@ eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
 . "$HOME/.cargo/env"
 
 eval "$(zoxide init zsh)"
+
+# Go
+export GOPATH="$HOME/Dev/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$GOBIN:$PATH"
