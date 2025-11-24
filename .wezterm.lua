@@ -1,5 +1,5 @@
 -- Pull in the wezterm API
-local wezterm = require('wezterm')
+local wezterm = require("wezterm")
 
 -- This table will hold the configuration.
 local config = {}
@@ -14,40 +14,61 @@ end
 
 -- config.animation_fps = 60
 -- config.max_fps = 60
-config.front_end = 'WebGpu'
-config.webgpu_power_preference = 'HighPerformance'
+config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
 
 -- For example, changing the color scheme:
-config.color_scheme = 'Everblush'
+config.color_scheme = "Everblush"
 config.colors = {
-  selection_fg = '#9da2a2',
-  selection_bg = '#2f343f',
+  selection_fg = "#9da2a2",
+  selection_bg = "#2f343f",
   -- selection_bg = '#141b1e',
 }
 
 config.window_background_opacity = 0.98
+config.window_decorations = "RESIZE"
+config.enable_tab_bar = false
 config.native_macos_fullscreen_mode = true
 
 config.font = wezterm.font_with_fallback({
-  'JetBrains Mono',
-  'Symbols Nerd Font',
+  "JetBrains Mono",
+  "Symbols Nerd Font",
 })
+
+config.bold_brightens_ansi_colors = "BrightAndBold"
+
+-- Simplified rule: explicitly map the 'Bold' text style to the Bold font weight.
+-- This is the cleanest way to ensure WezTerm uses the correct font variant.
+config.font_rules = {
+  {
+    intensity = "Bold",
+    font = wezterm.font_with_fallback({
+      { family = "JetBrains Mono", weight = "Bold" },
+      "Symbols Nerd Font",
+    }),
+  },
+}
 config.font_size = 13.0
 config.line_height = 1.15
 
 config.keys = {
   {
-    key = '/',
-    mods = 'CMD',
-    action = wezterm.action({ SendString = '\x20/' }),
+    key = "/",
+    mods = "CMD",
+    action = wezterm.action({ SendString = "\x20/" }),
   },
   {
-    key = 'k',
-    mods = 'CMD',
+    key = "k",
+    mods = "CMD",
     action = wezterm.action.Multiple({
-      wezterm.action.ClearScrollback('ScrollbackAndViewport'),
-      wezterm.action.SendKey({ key = 'L', mods = 'CTRL' }),
+      wezterm.action.ClearScrollback("ScrollbackAndViewport"),
+      wezterm.action.SendKey({ key = "L", mods = "CTRL" }),
     }),
+  },
+  {
+    key = "w",
+    mods = "CMD",
+    action = wezterm.action.CloseCurrentPane({ confirm = false }),
   },
 }
 
@@ -60,7 +81,7 @@ config.show_tab_index_in_tab_bar = true
 config.use_fancy_tab_bar = true
 config.switch_to_last_active_tab_when_closing_tab = true
 
-config.window_close_confirmation = 'NeverPrompt'
+config.window_close_confirmation = "NeverPrompt"
 
 -- and finally, return the configuration to wezterm
 return config
