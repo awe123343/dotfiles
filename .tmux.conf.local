@@ -5,7 +5,7 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
-set -g default-terminal "screen-256color"
+set -g default-terminal "tmux-256color"
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
 # -- session creation ----------------------------------------------------------
@@ -68,7 +68,7 @@ tmux_conf_24b_colour=auto
 #   - tmux_conf_theme_mouse
 #   - tmux_conf_theme_root
 #   - tmux_conf_theme_synchronized
-tmux_conf_theme=enabled
+tmux_conf_theme=disabled
 
 # default theme
 tmux_conf_theme_colour_1="#080808"    # dark gray
@@ -181,7 +181,7 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 tmux_conf_theme_window_status_fg="$tmux_conf_theme_colour_3"
 tmux_conf_theme_window_status_bg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_window_status_attr="none"
-tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+# tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
@@ -198,7 +198,7 @@ tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_
 tmux_conf_theme_window_status_current_fg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_window_status_current_bg="$tmux_conf_theme_colour_4"
 tmux_conf_theme_window_status_current_attr="bold"
-tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+# tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
 #tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
@@ -254,8 +254,8 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %b %d | #{username}#{root} | #{hostname} "
+# tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
+# tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %b %d | #{username}#{root} | #{hostname} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
@@ -419,31 +419,6 @@ tmux_conf_uninstall_plugins_on_reload=true
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
 #set -g @plugin 'tmux-plugins/tmux-copycat'
-#set -g @plugin 'tmux-plugins/tmux-cpu'
-#set -g @plugin 'tmux-plugins/tmux-resurrect'
-#set -g @plugin 'tmux-plugins/tmux-continuum'
-#set -g @continuum-restore 'on'
-
-set -g @catppuccin_flavour 'everblush' # or mocha, macchiato, frappe
-set -g @catppuccin_date_time "%Y-%m-%d %H:%M"
-set -g @catppuccin_user "on"
-set -g @catppuccin_host "on"
-set -g @catppuccin_datetime_icon '󰃰'
-# set -g @catppuccin_l_left_separator ""
-# set -g @catppuccin_l_right_separator ""
-# set -g @catppuccin_r_left_separator ""
-# set -g @catppuccin_r_right_separator ""
-# set -g @catppuccin_l_left_separator ""
-# set -g @catppuccin_l_right_separator ""
-set -g @catppuccin_r_left_separator ""
-set -g @catppuccin_r_right_separator ""
-set -g @catppuccin_l_left_separator "█"
-set -g @catppuccin_l_right_separator "█"
-# set -g @catppuccin_r_left_separator "█"
-# set -g @catppuccin_r_right_separator "█"
-set -g @catppuccin_window_tabs_enabled on # or off to disable window_tabs
-set -g @catppuccin_powerline_icons_theme_enabled off
-set -g @catppuccin_pill_theme_enabled off
 
 # set -g @plugin 'noscript/tmux-mighty-scroll'
 set -g @plugin 'christoomey/vim-tmux-navigator'
@@ -451,10 +426,48 @@ set -g @vim_navigator_prefix_mapping_clear_screen "C-k"
 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
-# set -g @plugin 'catppuccin/tmux'
-set -g @plugin 'awe123343/tmux-everblush'
-
 set -g @continuum-restore 'on'
+
+# Catppuccin Configuration (Remote Everblush Fork)
+
+# Set Catppuccin options
+set -g @catppuccin_flavor "everblush"
+set -g @catppuccin_window_status_style "rounded"
+
+# Force rounded separators for current window (fix for square issue)
+set -g @catppuccin_window_current_left_separator "#[fg=#{@thm_bg},reverse]#[none]"
+set -g @catppuccin_window_current_right_separator "#[fg=#{@thm_bg},reverse]#[none]"
+
+set -g @catppuccin_window_text " #W"
+set -g @catppuccin_window_current_text " #W"
+set -g @catppuccin_window_number "#I"
+set -g @catppuccin_window_current_number "#I"
+set -g @catppuccin_window_number_position "left"
+
+# Tab index colors (like the example: orange for active, blue for inactive)
+set -g @catppuccin_window_current_number_color "#fab387"  # peach/orange for active tab
+set -g @catppuccin_window_number_color "#67b0e8"          # blue for inactive tabs
+
+set -g window-status-separator " "
+
+set -g @catppuccin_status_background "#151b1e"
+set -g @catppuccin_pane_border_style "fg=#3a3a3a"
+set -g @catppuccin_pane_active_border_style "fg=#73add3"
+
+# Configure the status line
+set -g status-right-length 200
+set -g status-left-length 100
+set -g status-left ""
+set -g status-right "#{E:@catppuccin_status_directory}"
+set -ag status-right "#{E:@catppuccin_status_application}"
+set -agF status-right "#{E:@catppuccin_status_cpu}"
+set -ag status-right "#{E:@catppuccin_status_session}"
+set -ag status-right "#{E:@catppuccin_status_date_time}"
+set -agF status-right "#{E:@catppuccin_status_battery}"
+
+set -g @plugin 'awe123343/tmux-everblush'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-battery'
 
 # -- custom variables ----------------------------------------------------------
 
