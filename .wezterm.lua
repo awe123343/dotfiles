@@ -12,6 +12,8 @@ end
 
 -- This is where you actually apply your config choices
 
+config.automatically_reload_config = true
+
 -- config.animation_fps = 60
 -- config.max_fps = 60
 config.front_end = 'WebGpu'
@@ -187,13 +189,6 @@ config.window_close_confirmation = 'NeverPrompt'
 --   extensions = { "resurrect", "smart_workspace_switcher" }, -- Show status in tabline
 -- })
 -- tabline.apply_to_config(config)
-
-config.window_padding = {
-  left = '1cell',
-  right = '1cell',
-  top = '0.5cell',
-  bottom = '0.5cell',
-}
 
 -- and finally, return the configuration to wezterm
 return config
