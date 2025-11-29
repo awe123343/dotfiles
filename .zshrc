@@ -5,11 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # ============================================================================
-# Zim Framework (migrated from oh-my-zsh)
+# Zim Framework
 # ============================================================================
 
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
@@ -39,10 +36,11 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
+# ============================================================================
+# Environment Variables
+# ============================================================================
 
-# ============================================================================
-# Environment Variables (merged from .zshenv and .zprofile)
-# ============================================================================
+export DEV_DIR="$HOME/Dev"
 
 # export DOTNET_ROOT=$HOME/.dotnet
 export DOTNET_ROOT=/usr/local/share/dotnet
@@ -51,18 +49,38 @@ export PATH=$PATH:$DOTNET_ROOT:$HOME/.dotnet/tools/:$DOTNET_ROOT/tools
 export LANG="en_US.UTF-8"
 export KUBE_EDITOR="nvim"
 export EDITOR="nvim" # Used by oh-my-tmux
+# FZF
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
 export FZF_DEFAULT_OPTS=" \
 --tmux \
 --height 50% \
 --reverse \
---border"
-# fzf integration is handled by zim fzf module
+--border \
+--bind '?:toggle-preview' \
+--preview-window=right:50%"
+
+export FZF_CTRL_T_OPTS=" \
+--preview 'bat \
+  --color=always \
+  --style=numbers \
+  --line-range :500 {} 2>/dev/null || cat {}'"
+
+export FZF_ALT_C_OPTS=" \
+--preview 'eza \
+  --tree \
+  --color=always \
+  --icons {} 2>/dev/null || ls -la {}'"
+
+# fzf keybindings and completion (deferred)
+zsh-defer eval "$(fzf --zsh)"
 
 # Ruby
-if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
-  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
-fi
+# if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  # export PATH=/opt/homebrew/opt/ruby/bin:$PATH
+  # export PATH=`gem environment gemdir`/bin:$PATH
+# fi
 
 # source $(dirname $(gem which colorls))/tab_complete.sh
 
@@ -70,13 +88,16 @@ export PATH=/Applications/Ghostty.app/Contents/MacOS:$PATH
 
 export PATH=/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH
 
+# Added by Toolbox App
+export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+
 # Go
-export GOPATH="$HOME/Dev/go"
+export GOPATH="$DEV_DIR/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$GOPATH/bin:$PATH"
 
 # Java
-export JAVA_HOME=$(/usr/libexec/java_home -v25)
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-25.jdk/Contents/Home
 export PATH=$JAVA_HOME/bin:$PATH
 
 # pnpm
@@ -93,53 +114,77 @@ esac
 # uv
 . "$HOME/.local/bin/env"
 
-# fnm
-eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
+# Completions cache directory
+ZSH_COMPLETIONS_CACHE="$HOME/.cache/zsh/completions"
+[[ -d "$ZSH_COMPLETIONS_CACHE" ]] || mkdir -p "$ZSH_COMPLETIONS_CACHE"
 
-# zoxide - handled by zim module
+# fnm (env deferred, completions cached)
+function _setup_fnm() {
+  # Completions: source cache, regenerate in background
+  [[ -f "$ZSH_COMPLETIONS_CACHE/_fnm" ]] && source "$ZSH_COMPLETIONS_CACHE/_fnm"
+  fnm completions --shell zsh >| "$ZSH_COMPLETIONS_CACHE/_fnm" &|
+  # Env: must eval each time (node version can change)
+  eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
+}
+(( $+commands[fnm] )) && zsh-defer _setup_fnm
 
-# Added by Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+# zoxide (deferred)
+zsh-defer eval "$(zoxide init zsh)"
 
-# Terminal - TERM is set by:
-#   - tmux: via `set -g default-terminal "tmux-256color"` in ~/.tmux.conf.local
-#   - Outside tmux: by the terminal emulator (Ghostty, iTerm2, etc.)
+# uv/uvx (completions cached, regenerate in background)
+function _setup_uv() {
+  [[ -f "$ZSH_COMPLETIONS_CACHE/_uv" ]] && source "$ZSH_COMPLETIONS_CACHE/_uv"
+  [[ -f "$ZSH_COMPLETIONS_CACHE/_uvx" ]] && source "$ZSH_COMPLETIONS_CACHE/_uvx"
+  uv generate-shell-completion zsh >| "$ZSH_COMPLETIONS_CACHE/_uv" &|
+  uvx --generate-shell-completion zsh >| "$ZSH_COMPLETIONS_CACHE/_uvx" &|
+}
+(( $+commands[uv] )) && zsh-defer _setup_uv
 
 # ============================================================================
-# Aliases
+# Aliases & Configuration
 # ============================================================================
 
 alias vi='nvim'
 alias vim='nvim'
 alias cls='clear'
 alias ssh='TERM=${TERM/xterm-ghostty/xterm-256color} ssh'
+alias w1='watch -n 1 '
 
 alias ls='eza'
-alias lc='lsd -l --group-directories-first'
-alias lca='lsd -Al --group-directories-first'
-alias lct='lsd --tree --group-directories-first'
-alias l='eza -lg --icons --group-directories-first --sort=name --time-style=long-iso'
-alias la='eza -alg --icons --group-directories-first --sort=name --time-style=long-iso'
-alias lt='eza -lg --icons --group-directories-first --sort=name --time-style=long-iso --tree'
+_eza_opts="\
+--icons \
+--group-directories-first \
+--sort=name \
+--time-style=long-iso \
+--hyperlink"
+alias l="eza -lg $_eza_opts"
+alias la="eza -alg $_eza_opts"
+alias lt="eza -lg $_eza_opts --tree --level=2"
 
-# ============================================================================
-# Powerlevel10k
-# ============================================================================
+_lsd_opts="\
+--group-directories-first \
+--hyperlink=auto"
+alias lc="lsd -l $_lsd_opts"
+alias lca="lsd -Al $_lsd_opts"
+alias lct="lsd --tree --depth=2 $_lsd_opts"
 
+# Powerlevel10k (legacy p9k config, overridden by ~/.p10k.zsh if exists)
 POWERLEVEL9K_MODE="nerdfont-complete"
-# Customise the Powerlevel9k prompts
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon ssh dir vcs status newline)
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user ssh dir vcs status newline)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(pyenv command_execution_time time)
-# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# ============================================================================
-# Plugin Configuration
-# ============================================================================
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+
+# Google Cloud SDK
+if [ -f "$DEV_DIR/google-cloud-sdk/path.zsh.inc" ]; then
+  . "$DEV_DIR/google-cloud-sdk/path.zsh.inc"
+fi
+# gcloud completion (deferred - slow)
+if [ -f "$DEV_DIR/google-cloud-sdk/completion.zsh.inc" ]; then
+  zsh-defer . "$DEV_DIR/google-cloud-sdk/completion.zsh.inc"
+fi
 
 function jdk() {
   version=$1
@@ -155,8 +200,14 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+# OrbStack (deferred)
+zsh-defer source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # Key Bindings
 bindkey "^U" backward-kill-line
+
+# Make Ctrl+W stop at special chars (like bash/oh-my-zsh)
+WORDCHARS=''
+
+# Disable paste highlight (white background)
+zle_highlight=('paste:none')

@@ -71,12 +71,21 @@ config.font_rules = {
   },
 }
 
--- Copy on select to system clipboard
+-- Copy on select to system clipboard (and handle hyperlinks)
 config.mouse_bindings = {
   {
     event = { Up = { streak = 1, button = 'Left' } },
     mods = 'NONE',
-    action = wezterm.action.CompleteSelection('ClipboardAndPrimarySelection'),
+    action = wezterm.action.Multiple({
+      wezterm.action.CompleteSelection('ClipboardAndPrimarySelection'),
+      wezterm.action.OpenLinkAtMouseCursor,
+    }),
+  },
+  -- Allow Cmd+Click to force open link (using SUPER for macOS Cmd)
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'SUPER',
+    action = wezterm.action.OpenLinkAtMouseCursor,
   },
 }
 

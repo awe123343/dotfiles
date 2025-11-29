@@ -30,6 +30,20 @@ zmodule termtitle
 zmodule utility
 
 # ----------------
+# Prompt (load early for instant prompt)
+# ----------------
+
+# Powerlevel10k theme
+zmodule romkatv/powerlevel10k --use degit
+
+# ----------------
+# Deferred loading
+# ----------------
+
+# zsh-defer for deferring slow operations
+zmodule romkatv/zsh-defer --use degit
+
+# ----------------
 # Completion
 # ----------------
 
@@ -56,9 +70,6 @@ zmodule ohmyzsh/ohmyzsh --root plugins/tmux
 # kubectl completion and aliases
 zmodule ohmyzsh/ohmyzsh --root plugins/kubectl
 
-# zoxide (smart cd)
-zmodule ohmyzsh/ohmyzsh --root plugins/zoxide
-
 # ----------------
 # External modules
 # ----------------
@@ -71,13 +82,3 @@ zmodule zsh-users/zsh-syntax-highlighting
 
 # Solarized dircolors (requires dircolors/gdircolors)
 zmodule joel-porquet/zsh-dircolors-solarized
-
-# fzf integration
-zmodule junegunn/fzf --source shell/completion.zsh --source shell/key-bindings.zsh
-
-# ----------------
-# Prompt
-# ----------------
-
-# Powerlevel10k theme
-zmodule romkatv/powerlevel10k --use degit
