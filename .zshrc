@@ -1,5 +1,3 @@
-bindkey "^U" backward-kill-line
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -13,8 +11,13 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-export JAVA_HOME=$(/usr/libexec/java_home -v25)
-export PATH=$JAVA_HOME/bin:$PATH
+# ============================================================================
+# Environment Variables (merged from .zshenv and .zprofile)
+# ============================================================================
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # export DOTNET_ROOT=$HOME/.dotnet
 export DOTNET_ROOT=/usr/local/share/dotnet
@@ -28,7 +31,7 @@ export FZF_DEFAULT_OPTS=" \
 --height 50% \
 --reverse \
 --border"
-source <(fzf --zsh)
+# fzf integration is handled by oh-my-zsh fzf plugin
 
 # Ruby
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
@@ -41,6 +44,43 @@ fi
 export PATH=/Applications/Ghostty.app/Contents/MacOS:$PATH
 
 export PATH=/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH
+
+# Go
+export GOPATH="$HOME/Dev/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$GOPATH/bin:$PATH"
+
+# Java
+export JAVA_HOME=$(/usr/libexec/java_home -v25)
+export PATH=$JAVA_HOME/bin:$PATH
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Rust/Cargo
+. "$HOME/.cargo/env"
+
+# uv
+. "$HOME/.local/bin/env"
+
+# fnm
+eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# Terminal - TERM is set by:
+#   - tmux: via `set -g default-terminal "tmux-256color"` in ~/.tmux.conf.local
+#   - Outside tmux: by the terminal emulator (Ghostty, iTerm2, etc.)
+
+# ============================================================================
+# Oh-My-Zsh Configuration
+# ============================================================================
 
 alias vi='nvim'
 alias vim='nvim'
@@ -102,7 +142,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git 
+  git
   zoxide
   fzf
   tmux
@@ -151,18 +191,15 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(pyenv command_execution_time time)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export TERM=xterm-256color
-[[ $TMUX != "" ]] && export TERM="screen-256color"
-
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 DISABLE_UPDATE_PROMPT=false
 
 source $ZSH/oh-my-zsh.sh
 
-jdk() {
-    version=$1
-    export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
-    export PATH=$JAVA_HOME/bin:$PATH
+function jdk() {
+  version=$1
+  export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+  export PATH=$JAVA_HOME/bin:$PATH
 }
 
 function y() {
@@ -181,4 +218,8 @@ alias l='eza -lg --icons --group-directories-first --sort=name --time-style=long
 alias la='eza -alg --icons --group-directories-first --sort=name --time-style=long-iso'
 alias lt='eza -lg --icons --group-directories-first --sort=name --time-style=long-iso --tree'
 
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# Key Bindings (must be after p10k)
 bindkey "^U" backward-kill-line
