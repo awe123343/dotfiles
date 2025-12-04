@@ -424,19 +424,28 @@ tmux_conf_uninstall_plugins_on_reload=true
 set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @vim_navigator_prefix_mapping_clear_screen ""
 
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @continuum-restore 'on'
-
 # Catppuccin Configuration (Remote Everblush Fork)
 
 # Set Catppuccin options
 set -g @catppuccin_flavor "everblush"
 set -g @catppuccin_window_status_style "rounded"
 
+# Custom window style to handle transparency with glyphs and multi-line status bar
+set -g @catppuccin_window_status_style "custom"
+
+# Tab index colors (like the example: orange for active, blue for inactive)
+# set -g @catppuccin_window_current_number_color "#fab387"  # peach/orange for active tab
+# set -g @catppuccin_window_number_color "#67b0e8"  # blue for inactive tabs
+set -g @catppuccin_window_current_number_color "#{@thm_peach}"  # peach/orange for active tab
+set -g @catppuccin_window_number_color "#{@thm_blue}"  # blue for inactive tabs
+
 # Force rounded separators for current window (fix for square issue)
-set -g @catppuccin_window_current_left_separator "#[fg=#{@thm_bg},reverse]#[none]"
-set -g @catppuccin_window_current_right_separator "#[fg=#{@thm_bg},reverse]#[none]"
+set -g @catppuccin_window_left_separator "#[bg=default,fg=#{@catppuccin_window_number_color}]#[bg=#{@catppuccin_window_number_color},fg=#{@thm_surface_0}]"
+set -g @catppuccin_window_middle_separator "#[fg=#{@catppuccin_window_number_color}]█"
+set -g @catppuccin_window_right_separator "#[bg=default,fg=#{@thm_surface_0}]"
+set -g @catppuccin_window_current_left_separator "#[bg=default,fg=#{@catppuccin_window_current_number_color}]#[bg=#{@catppuccin_window_current_number_color},fg=#{@thm_bg}]"
+set -g @catppuccin_window_current_middle_separator "#[fg=#{@catppuccin_window_current_number_color}]█"
+set -g @catppuccin_window_current_right_separator "#[bg=default,fg=#{@thm_surface_1}]"
 
 set -g @catppuccin_window_text " #W"
 set -g @catppuccin_window_current_text " #W"
@@ -444,15 +453,12 @@ set -g @catppuccin_window_number "#I"
 set -g @catppuccin_window_current_number "#I"
 set -g @catppuccin_window_number_position "left"
 
-# Tab index colors (like the example: orange for active, blue for inactive)
-set -g @catppuccin_window_current_number_color "#fab387"  # peach/orange for active tab
-set -g @catppuccin_window_number_color "#67b0e8"          # blue for inactive tabs
-
-set -g window-status-separator " "
-
-set -g @catppuccin_status_background "#151b1e"
+# set -g @catppuccin_status_background "#151b1e"
 set -g @catppuccin_pane_border_style "fg=#3a3a3a"
 set -g @catppuccin_pane_active_border_style "fg=#73add3"
+
+# Key transparency settings
+set -g @catppuccin_status_background "none"
 
 # Configure the status line
 set -g status-right-length 200
@@ -469,8 +475,17 @@ set -g @plugin 'awe123343/tmux-everblush'
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-battery'
 
+set -g @continuum-restore 'on'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
 # Clear screen and scrollback history with Prefix + C-k
 bind C-k send-keys -R \; clear-history \; send-keys C-l
+
+# Auto-reload config after session restore to fix rendering
+# set-hook -g session-created 'source-file ~/.tmux.conf'
+# run-shell 'sleep 0.5 && tmux refresh-client -S'
+
 
 # -- custom variables ----------------------------------------------------------
 
