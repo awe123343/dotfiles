@@ -16,3 +16,6 @@ eval "$(zoxide init zsh)"
 export GOPATH="$HOME/Dev/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$GOBIN:$PATH"
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
