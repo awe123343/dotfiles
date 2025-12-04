@@ -1,6 +1,8 @@
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+export PATH="/opt/homebrew/bin:$PATH"
+
 # fnm
 eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
 
