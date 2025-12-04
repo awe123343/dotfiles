@@ -7,11 +7,5 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
-# fnm
-eval "$(fnm env --use-on-cd --shell zsh)"
-
-# uv
-. "$HOME/.local/bin/env"
-
 # rust
 . "$HOME/.cargo/env"
