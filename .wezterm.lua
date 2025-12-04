@@ -41,14 +41,7 @@ config.use_fancy_tab_bar = false
 config.switch_to_last_active_tab_when_closing_tab = true
 config.tab_bar_at_bottom = true
 
-local function font(opts)
-  return wezterm.font_with_fallback({
-    opts,
-    'Symbols Nerd Font',
-  })
-end
-
-config.font = font('JetBrains Mono')
+config.font = wezterm.font('JetBrainsMono Nerd Font')
 config.font_size = 13.0
 config.line_height = 1.15
 
@@ -57,17 +50,17 @@ config.font_rules = {
   {
     intensity = 'Bold',
     italic = false,
-    font = font({ family = 'JetBrains Mono', weight = 700, stretch = 'Normal', style = 'Normal' }),
+    font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Bold' }),
   },
   {
     intensity = 'Normal',
     italic = true,
-    font = font({ family = 'JetBrains Mono', style = 'Italic' }),
+    font = wezterm.font('JetBrainsMono Nerd Font', { style = 'Italic' }),
   },
   {
     intensity = 'Bold',
     italic = true,
-    font = font({ family = 'JetBrains Mono', weight = 700, stretch = 'Normal', style = 'Italic' }),
+    font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Bold', style = 'Italic' }),
   },
 }
 
