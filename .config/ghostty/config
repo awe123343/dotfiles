@@ -47,7 +47,7 @@ window-show-tab-bar = auto
 
 # --- Option Key ---
 # Use Option as Meta (Esc+)
-macos-option-as-alt = true
+macos-option-as-alt = left
 
 # --- Keybindings ---
 keybind = cmd+/=text:\x20/
