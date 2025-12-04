@@ -4,6 +4,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # fnm
 eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
 
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 # uv
 . "$HOME/.local/bin/env"
 
