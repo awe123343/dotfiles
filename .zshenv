@@ -6,3 +6,5 @@ eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
 
 # rust
 . "$HOME/.cargo/env"
+
+eval "$(zoxide init zsh)"
