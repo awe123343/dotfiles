@@ -422,7 +422,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # set -g @plugin 'noscript/tmux-mighty-scroll'
 set -g @plugin 'christoomey/vim-tmux-navigator'
-set -g @vim_navigator_prefix_mapping_clear_screen "C-k"
+set -g @vim_navigator_prefix_mapping_clear_screen ""
 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
@@ -462,12 +462,15 @@ set -g status-right "#{E:@catppuccin_status_directory}"
 set -ag status-right "#{E:@catppuccin_status_application}"
 set -agF status-right "#{E:@catppuccin_status_cpu}"
 set -ag status-right "#{E:@catppuccin_status_session}"
-set -ag status-right "#{E:@catppuccin_status_date_time}"
 set -agF status-right "#{E:@catppuccin_status_battery}"
+set -ag status-right "#{E:@catppuccin_status_date_time}"
 
 set -g @plugin 'awe123343/tmux-everblush'
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-battery'
+
+# Clear screen and scrollback history with Prefix + C-k
+bind C-k send-keys -R \; clear-history \; send-keys C-l
 
 # -- custom variables ----------------------------------------------------------
 
