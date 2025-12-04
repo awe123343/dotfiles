@@ -20,8 +20,10 @@ config.webgpu_power_preference = 'HighPerformance'
 -- For example, changing the color scheme:
 config.color_scheme = 'Everblush'
 config.colors = {
-  selection_fg = '#9da2a2',
-  selection_bg = '#2f343f',
+  -- selection_fg = '#f5c2e7',
+  selection_fg = '#67b0e8',
+  selection_bg = '#485254',
+  -- selection_fg = '#9da2a2',
   -- selection_bg = '#141b1e',
 }
 
