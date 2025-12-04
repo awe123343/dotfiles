@@ -1,7 +1,6 @@
 # --- Fonts ---
-# Note: Ghostty automatically detects and uses 'Symbols Nerd Font' (or other installed Nerd Fonts)
-# as a fallback for missing glyphs, so explicit fallback configuration is not required.
-font-family = "JetBrains Mono"
+font-family = JetBrains Mono
+font-family = Symbols Nerd Font
 font-size = 13
 adjust-cell-height = 15%
 
