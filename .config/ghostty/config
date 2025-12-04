@@ -48,5 +48,5 @@ window-show-tab-bar = auto
 macos-option-as-alt = true
 
 # --- Keybindings ---
-keybind = cmd+/=text: /
+keybind = cmd+/=text:\x20/
 keybind = cmd+k=clear_screen
