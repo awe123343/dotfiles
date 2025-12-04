@@ -38,12 +38,6 @@ fi
 
 # source $(dirname $(gem which colorls))/tab_complete.sh
 
-# fnm
-eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
-
-# uv
-. "$HOME/.local/bin/env"
-
 export PATH=/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH
 
 alias vi='nvim'
