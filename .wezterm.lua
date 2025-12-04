@@ -26,6 +26,7 @@ config.colors = {
   -- selection_fg = "#9da2a2",
   -- selection_bg = '#141b1e',
 }
+config.bold_brightens_ansi_colors = false
 
 config.window_padding = {
   left = 8,
@@ -46,7 +47,8 @@ config.use_fancy_tab_bar = false
 config.switch_to_last_active_tab_when_closing_tab = true
 config.tab_bar_at_bottom = true
 
-config.font = wezterm.font('JetBrainsMono Nerd Font')
+local font_name = 'JetBrainsMono Nerd Font'
+config.font = wezterm.font(font_name)
 config.font_size = 13.0
 config.line_height = 1.15
 
@@ -55,17 +57,17 @@ config.font_rules = {
   {
     intensity = 'Bold',
     italic = false,
-    font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Bold' }),
+    font = wezterm.font(font_name, { weight = 'Bold' }),
   },
   {
     intensity = 'Normal',
     italic = true,
-    font = wezterm.font('JetBrainsMono Nerd Font', { style = 'Italic' }),
+    font = wezterm.font(font_name, { style = 'Italic' }),
   },
   {
     intensity = 'Bold',
     italic = true,
-    font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Bold', style = 'Italic' }),
+    font = wezterm.font(font_name, { weight = 'Bold', style = 'Italic' }),
   },
 }
 
