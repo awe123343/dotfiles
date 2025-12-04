@@ -1,0 +1,14 @@
+set number              " Show number
+set relativenumber      " Show relative number
+
+set ignorecase    " Search ignoring case
+set smartcase     " Keep case when searching with *
+set infercase     " Adjust case in insert completion mode
+set incsearch     " Incremental search
+set wrapscan      " Searches wrap around the end of the file
+set hlsearch      " Highlight search results
+
+set clipboard+=unnamed
+
+nmap gI :action GotoImplementation<CR>
+nmap gr :action ShowUsages<CR>
