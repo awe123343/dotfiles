@@ -414,6 +414,9 @@ set -g allow-passthrough on
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
 
+# Enable hyperlinks (OSC 8) in tmux
+set -as terminal-features ',*:hyperlinks'
+
 # /!\ the tpm bindings differ slightly from upstream:
 #   - installing plugins: <prefix> + I
 #   - uninstalling plugins: <prefix> + Alt + u
