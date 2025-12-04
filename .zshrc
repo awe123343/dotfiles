@@ -38,6 +38,8 @@ fi
 
 # source $(dirname $(gem which colorls))/tab_complete.sh
 
+export PATH=/Applications/Ghostty.app/Contents/MacOS:$PATH
+
 export PATH=/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH
 
 alias vi='nvim'

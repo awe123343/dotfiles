@@ -53,3 +53,6 @@ macos-option-as-alt = true
 # --- Keybindings ---
 keybind = cmd+/=text:\x20/
 keybind = cmd+k=clear_screen
+
+# --- Links ---
+link-url = true
