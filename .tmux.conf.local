@@ -359,7 +359,7 @@ tmux_conf_copy_to_os_clipboard=true
 set -g history-limit 99999
 
 # start with mouse mode enabled
-set -g mouse off
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
@@ -446,15 +446,15 @@ set -g @catppuccin_powerline_icons_theme_enabled off
 set -g @catppuccin_pill_theme_enabled off
 
 # set -g @plugin 'noscript/tmux-mighty-scroll'
-# set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @vim_navigator_prefix_mapping_clear_screen "C-k"
+
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 # set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'awe123343/tmux-everblush'
 
 set -g @continuum-restore 'on'
-
-bind C-k send-keys C-l \; run 'sleep 0.2' \; clear-history
 
 # -- custom variables ----------------------------------------------------------
 
