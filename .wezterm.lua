@@ -21,8 +21,8 @@ config.webgpu_power_preference = 'HighPerformance'
 config.color_scheme = 'Everblush'
 config.colors = {
   selection_fg = '#9da2a2',
-  -- selection_bg = '#2f343f',
-  selection_bg = '#141b1e',
+  selection_bg = '#2f343f',
+  -- selection_bg = '#141b1e',
 }
 
 config.window_background_opacity = 0.98
