@@ -14,8 +14,6 @@ end
 
 config.automatically_reload_config = true
 
--- config.animation_fps = 60
--- config.max_fps = 60
 config.front_end = 'WebGpu'
 config.webgpu_power_preference = 'HighPerformance'
 
@@ -110,9 +108,8 @@ config.keys = {
   },
 }
 
--- config.scrollback_lines = 99999
+config.scrollback_lines = 10000000
 config.enable_scroll_bar = false
--- config.alternate_buffer_wheel_scroll_speed = 10
 
 config.window_close_confirmation = 'NeverPrompt'
 
