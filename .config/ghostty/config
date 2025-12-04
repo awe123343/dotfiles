@@ -1,0 +1,52 @@
+# --- Fonts ---
+# Note: Ghostty automatically detects and uses 'Symbols Nerd Font' (or other installed Nerd Fonts)
+# as a fallback for missing glyphs, so explicit fallback configuration is not required.
+font-family = "JetBrains Mono"
+font-size = 13
+adjust-cell-height = 15%
+
+# --- Cursor ---
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor,path,title,sudo
+
+# --- Bell / Notifications ---
+# Remove red dot (notification badge).
+# 'no-attention' should disable the dock badge/bounce.
+bell-features = no-system,no-audio,no-attention,title,no-border
+
+# --- Theme ---
+theme = Everblush
+selection-foreground = #9da2a2
+selection-background = #2f343f
+
+# --- Window ---
+background-opacity = 0.98
+# Add window padding (default is usually 0 or very small in some terminals).
+# Ghostty default is 2, bumping it up slightly gives more breathing room.
+window-padding-x = 8
+window-padding-y = 12,8
+# Disable window shadow. This sometimes removes the subtle 1px border drawn by macOS
+# around frameless/transparent windows.
+macos-window-shadow = false
+
+confirm-close-surface = false
+macos-non-native-fullscreen = false
+
+# --- Titlebar ---
+macos-window-buttons = hidden
+macos-titlebar-style = hidden
+# macos-titlebar-style = tabs
+title = "👻"
+
+# --- Tabs ---
+# Auto-hide tab bar if only one tab is open (default behavior).
+window-show-tab-bar = auto
+
+# --- Option Key ---
+# Use Option as Meta (Esc+)
+macos-option-as-alt = true
+
+# --- Keybindings ---
+keybind = cmd+/=text: /
+keybind = cmd+k=clear_screen
