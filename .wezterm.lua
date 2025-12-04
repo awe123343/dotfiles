@@ -29,12 +29,19 @@ config.colors = {
   -- selection_bg = '#141b1e',
 }
 
+config.window_padding = {
+  left = 8,
+  right = 8,
+  top = 24,
+  bottom = 8,
+}
+
 config.window_background_opacity = 0.98
 config.window_decorations = 'RESIZE'
 
 config.enable_tab_bar = false
 config.native_macos_fullscreen_mode = true
---
+
 config.hide_tab_bar_if_only_one_tab = true
 config.show_tab_index_in_tab_bar = true
 config.use_fancy_tab_bar = false
