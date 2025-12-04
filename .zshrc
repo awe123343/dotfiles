@@ -144,6 +144,8 @@ function _setup_uv() {
 # Aliases & Configuration
 # ============================================================================
 
+alias grep='rg'
+alias find='fd'
 alias vi='nvim'
 alias vim='nvim'
 alias cls='clear'
