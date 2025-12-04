@@ -1,5 +1,6 @@
-# Add .NET Core SDK tools
-export PATH="$PATH:$HOME/.dotnet/tools"
-
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+# ~/.zprofile
+# This file is sourced for LOGIN shells only (before ~/.zshrc)
+# Most configurations should be in ~/.zshrc instead.
+#
+# Note: On macOS, Terminal.app opens login shells, but VS Code/Ghostty may not.
+# For consistent behavior, put everything in ~/.zshrc.
