@@ -231,8 +231,15 @@ function y() {
 # OrbStack (deferred)
 zsh-defer source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
+# ============================================================================
 # Key Bindings
-bindkey "^U" backward-kill-line
+# ============================================================================
+
+# Fix accidental Ctrl/Shift + Enter
+bindkey '\e[27;2;13~' accept-line  # Shift+Enter
+bindkey '\e[27;5;13~' accept-line  # Ctrl+Enter
+bindkey '\e[27;6;13~' accept-line  # Ctrl+Shift+Enter
+bindkey '\e[109;5u' accept-line    # Ctrl+m
 
 # Make Ctrl+W stop at special chars (like bash/oh-my-zsh)
 WORDCHARS=''
