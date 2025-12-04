@@ -56,3 +56,6 @@ keybind = cmd+k=clear_screen
 
 # --- Links ---
 link-url = true
+
+# --- Clipboard ---
+copy-on-select = clipboard

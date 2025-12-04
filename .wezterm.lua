@@ -22,10 +22,10 @@ config.webgpu_power_preference = 'HighPerformance'
 -- For example, changing the color scheme:
 config.color_scheme = 'Everblush'
 config.colors = {
-  -- selection_fg = '#f5c2e7',
+  -- selection_fg = "#f5c2e7",
   selection_fg = '#67b0e8',
   selection_bg = '#485254',
-  -- selection_fg = '#9da2a2',
+  -- selection_fg = "#9da2a2",
   -- selection_bg = '#141b1e',
 }
 
@@ -41,26 +41,35 @@ config.use_fancy_tab_bar = false
 config.switch_to_last_active_tab_when_closing_tab = true
 config.tab_bar_at_bottom = true
 
-config.font = wezterm.font_with_fallback({
-  'JetBrains Mono',
-  'Symbols Nerd Font',
-})
+local function font(opts)
+  return wezterm.font_with_fallback({
+    opts,
+    'Symbols Nerd Font',
+  })
+end
 
-config.bold_brightens_ansi_colors = 'BrightAndBold'
+config.font = font('JetBrains Mono')
+config.font_size = 13.0
+config.line_height = 1.15
 
--- Simplified rule: explicitly map the 'Bold' text style to the Bold font weight.
--- This is the cleanest way to ensure WezTerm uses the correct font variant.
+-- Weight: Regular=400, DemiBold=600, Bold=700, ExtraBold=800
 config.font_rules = {
   {
     intensity = 'Bold',
-    font = wezterm.font_with_fallback({
-      { family = 'JetBrains Mono', weight = 'Bold' },
-      'Symbols Nerd Font',
-    }),
+    italic = false,
+    font = font({ family = 'JetBrains Mono', weight = 700, stretch = 'Normal', style = 'Normal' }),
+  },
+  {
+    intensity = 'Normal',
+    italic = true,
+    font = font({ family = 'JetBrains Mono', style = 'Italic' }),
+  },
+  {
+    intensity = 'Bold',
+    italic = true,
+    font = font({ family = 'JetBrains Mono', weight = 700, stretch = 'Normal', style = 'Italic' }),
   },
 }
-config.font_size = 13.0
-config.line_height = 1.15
 
 -- -- Session resurrection plugin (like tmux-resurrect + continuum)
 -- local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
@@ -107,6 +116,15 @@ config.line_height = 1.15
 --     })
 --   end
 -- end)
+
+-- Copy on select to system clipboard
+config.mouse_bindings = {
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'NONE',
+    action = wezterm.action.CompleteSelection('ClipboardAndPrimarySelection'),
+  },
+}
 
 config.keys = {
   {
