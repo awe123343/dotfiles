@@ -429,10 +429,11 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @vim_navigator_prefix_mapping_clear_screen ""
 
 # Catppuccin Configuration (Remote Everblush Fork)
-
 # Set Catppuccin options
 set -g @catppuccin_flavor "everblush"
 set -g @catppuccin_window_status_style "rounded"
+
+set -g @catppuccin_mode_style "bg=#485254,fg=#67b0e8,bold"
 
 # Custom window style to handle transparency with glyphs and multi-line status bar
 set -g @catppuccin_window_status_style "custom"
