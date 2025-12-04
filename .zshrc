@@ -214,6 +214,28 @@ bindkey '\e[27;5;13~' accept-line  # Ctrl+Enter
 bindkey '\e[27;6;13~' accept-line  # Ctrl+Shift+Enter
 bindkey '\e[109;5u' accept-line    # Ctrl+m
 
+# History search based on prefix (Up/Down arrows)
+# Plugin: zsh-history-substring-search
+# These must be bound AFTER the plugin is loaded (which happens in ~/.zimrc)
+# Fix for multiline commands: check if the buffer has newlines.
+# If so, use default up-line behavior to navigate within the multiline buffer.
+if [[ -n "${terminfo[kcuu1]}" ]]; then
+  bindkey "${terminfo[kcuu1]}" history-substring-search-up
+fi
+if [[ -n "${terminfo[kcud1]}" ]]; then
+  bindkey "${terminfo[kcud1]}" history-substring-search-down
+fi
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# Set HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE to eliminate duplicates
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
 # Make Ctrl+W stop at special chars (like bash/oh-my-zsh)
 WORDCHARS=''
 
