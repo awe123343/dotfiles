@@ -7,6 +7,8 @@
 
 set -g default-terminal "tmux-256color"
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+# True color support
+set -ag terminal-overrides ",*:RGB"
 
 # -- session creation ----------------------------------------------------------
 
