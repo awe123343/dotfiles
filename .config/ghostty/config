@@ -17,8 +17,11 @@ bell-features = no-system,no-audio,no-attention,title,no-border
 
 # --- Theme ---
 theme = Everblush
-selection-foreground = #9da2a2
-selection-background = #2f343f
+# selection-foreground = #9da2a2
+# selection-background = #2f343f
+# selection-foreground = #f5c2e7
+selection-foreground = #67b0e8
+selection-background = #485254
 
 # --- Window ---
 background-opacity = 0.98
