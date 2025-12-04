@@ -175,8 +175,8 @@ alias ls='eza'
 alias lc='lsd -l --group-directories-first'
 alias lca='lsd -Al --group-directories-first'
 alias lct='lsd --tree --group-directories-first'
-alias l='eza -lg --icons --group-directories-first --sort=Name --time-style=long-iso'
-alias la='eza -alg --icons --group-directories-first --sort=Name --time-style=long-iso'
-alias lt='eza -lg --icons --group-directories-first --sort=Name --time-style=long-iso --tree'
+alias l='eza -lg --icons --group-directories-first --sort=name --time-style=long-iso'
+alias la='eza -alg --icons --group-directories-first --sort=name --time-style=long-iso'
+alias lt='eza -lg --icons --group-directories-first --sort=name --time-style=long-iso --tree'
 
 bindkey "^U" backward-kill-line
