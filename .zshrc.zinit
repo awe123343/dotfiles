@@ -1,44 +1,71 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Enable Powerlevel10k instant prompt.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# History (Must be set early)
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt EXTENDED_HISTORY SHARE_HISTORY HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS HIST_REDUCE_BLANKS HIST_VERIFY
+
 # ============================================================================
-# Zim Framework
+# Zinit Initialization
 # ============================================================================
 
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-
-# Use emacs keybindings (must be before zim init)
+# Use emacs keybindings
 bindkey -e
 
-# Homebrew (must be before zim init for plugins to find commands)
+# Homebrew (must be before zinit for plugins to find commands)
 if [[ -f /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # macOS uses gdircolors (required by zsh-dircolors-solarized)
-(( $+commands[gdircolors] )) && alias dircolors='gdircolors'
-
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+# Use function instead of alias (aliases don't work in scripts/functions)
+if (( $+commands[gdircolors] )); then
+  dircolors() { gdircolors "$@" }
 fi
 
-# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
+# Automatic Zinit installation
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+if [ ! -d $ZINIT_HOME/.git ]; then
+  git clone --depth 1 git@github.com:zdharma-continuum/zinit.git "$ZINIT_HOME" || \
+  git clone --depth 1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
+source "${ZINIT_HOME}/zinit.zsh"
 
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
+# Load Powerlevel10k (Instant)
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# History settings (Override Zim defaults)
-HISTSIZE=1000000
-SAVEHIST=1000000
+# Load zsh-defer (Instant)
+zinit light romkatv/zsh-defer
+
+# Load autosuggestions immediately (avoid delay)
+zinit light zsh-users/zsh-autosuggestions
+
+# ----------------------------------------------------------------------------
+# Plugins (Turbo)
+# ----------------------------------------------------------------------------
+
+# OMZ git library (required for git_current_branch, ggfl, etc.)
+zinit wait lucid for \
+  OMZL::git.zsh \
+  OMZP::git \
+  OMZP::tmux \
+  OMZP::kubectl \
+  zsh-users/zsh-syntax-highlighting
+
+# dircolors-solarized (load immediately, turbo causes issues with gdircolors)
+zinit light joel-porquet/zsh-dircolors-solarized
+
+# Load completions
+autoload -Uz compinit
+zinit wait lucid atload"zicompinit; zicdreplay" for \
+  zsh-users/zsh-completions
 
 # ============================================================================
 # Environment Variables
@@ -52,7 +79,8 @@ export PATH=$PATH:$DOTNET_ROOT:$HOME/.dotnet/tools/:$DOTNET_ROOT/tools
 
 export LANG="en_US.UTF-8"
 export KUBE_EDITOR="nvim"
-export EDITOR="nvim" # Used by oh-my-tmux
+export EDITOR="nvim"
+
 # FZF
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -77,7 +105,7 @@ export FZF_ALT_C_OPTS=" \
   --color=always \
   --icons {} 2>/dev/null || ls -la {}'"
 
-# fzf keybindings and completion (deferred)
+# FZF (Deferred)
 zsh-defer eval "$(fzf --zsh)"
 
 # Ruby
