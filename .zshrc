@@ -207,6 +207,7 @@ zsh-defer source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 # Key Bindings
 # ============================================================================
 
+bindkey "^U" backward-kill-line
 # Fix accidental Ctrl/Shift + Enter
 bindkey '\e[27;2;13~' accept-line  # Shift+Enter
 bindkey '\e[27;5;13~' accept-line  # Ctrl+Enter
