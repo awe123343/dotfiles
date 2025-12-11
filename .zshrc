@@ -95,6 +95,8 @@ export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-25.jdk/Contents/Home
 export PATH=$JAVA_HOME/bin:$PATH
 
+export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
+
 # Go
 export GOPATH="$DEV_DIR/go"
 export GOBIN="$GOPATH/bin"
