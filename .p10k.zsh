@@ -501,6 +501,26 @@
   # isn't in an svn or hg repository.
   typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
 
+  typeset -g POWERLEVEL9K_VCS_GIT_REMOTE_ICONS=(
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)archlinux.org)(|[/:?#]*)'                  VCS_GIT_ARCHLINUX_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)dev.azure.com|visualstudio.com)(|[/:?#]*)' VCS_GIT_AZURE_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)bitbucket.org)(|[/:?#]*)'                  VCS_GIT_BITBUCKET_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)codeberg.org)(|[/:?#]*)'                   VCS_GIT_CODEBERG_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)debian.org)(|[/:?#]*)'                     VCS_GIT_DEBIAN_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)freebsd.org)(|[/:?#]*)'                    VCS_GIT_FREEBSD_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)freedesktop.org)(|[/:?#]*)'                VCS_GIT_FREEDESKTOP_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)gitea.com|gitea.io)(|[/:?#]*)'             VCS_GIT_GITEA_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)github.com)(|[/:?#]*)'                     VCS_GIT_GITHUB_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)gitlab.com)(|[/:?#]*)'                     VCS_GIT_GITLAB_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)gitlab.adsrvr.org)(|[/:?#]*)'              VCS_GIT_GITLAB_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)gnome.org)(|[/:?#]*)'                      VCS_GIT_GNOME_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)gnu.org)(|[/:?#]*)'                        VCS_GIT_GNU_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)kde.org)(|[/:?#]*)'                        VCS_GIT_KDE_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)kernel.org)(|[/:?#]*)'                     VCS_GIT_LINUX_ICON
+    '(|[A-Za-z0-9][A-Za-z0-9+.-]#://)(|[^:/?#]#[.@])((#i)sr.ht)(|[/:?#]*)'                          VCS_GIT_SOURCEHUT_ICON
+    '*'                                                                                             VCS_GIT_ICON
+  )
+
   ##########################[ status: exit code of the last command ]###########################
   # Enable OK_PIPE, ERROR_PIPE and ERROR_SIGNAL status states to allow us to enable, disable and
   # style them independently from the regular OK and ERROR state.
