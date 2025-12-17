@@ -492,13 +492,6 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 # Clear screen and scrollback history with Prefix + C-k
 bind C-k send-keys -R \; clear-history \; send-keys C-l
 
-# Check if the current pane's command is 'lazygit' (FAST)
-is_lazygit="[ $(tmux display-message -p '#{pane_current_command}') = lazygit ]"
-
-# If in lazygit, send keys to it. Otherwise, switch panes.
-bind -n C-j if-shell "$is_lazygit" "send-keys C-j" "select-pane -D"
-bind -n C-k if-shell "$is_lazygit" "send-keys C-k" "select-pane -U"
-
 # Auto-reload config after session restore to fix rendering
 # set-hook -g session-created 'source-file ~/.tmux.conf'
 # run-shell 'sleep 0.5 && tmux refresh-client -S'
