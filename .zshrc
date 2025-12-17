@@ -88,6 +88,8 @@ zsh-defer eval "$(fzf --zsh)"
 
 export PATH=/Applications/Ghostty.app/Contents/MacOS:$PATH
 export PATH=/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 # Added by Toolbox App
 export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
