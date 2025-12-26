@@ -20,7 +20,10 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
 fi
 
 # macOS uses gdircolors (required by zsh-dircolors-solarized)
-(( $+commands[gdircolors] )) && alias dircolors='gdircolors'
+# Use function instead of alias (aliases don't work in scripts/functions)
+if (( $+commands[gdircolors] )); then
+  dircolors() { gdircolors "$@" }
+fi
 
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
