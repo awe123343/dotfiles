@@ -156,6 +156,7 @@ alias vim='nvim'
 alias cls='clear'
 alias ssh='TERM=${TERM/xterm-ghostty/xterm-256color} ssh'
 alias w1='watch -n 1 '
+alias dl='aria2c --conf-path=$HOME/.aria2/aria2.conf -D'
 
 alias ls='eza'
 _eza_opts="\
