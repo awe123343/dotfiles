@@ -179,6 +179,9 @@ alias vim='nvim'
 alias cls='clear'
 alias ssh='TERM=${TERM/xterm-ghostty/xterm-256color} ssh'
 alias w1='watch -n 1 '
+alias aria2='aria2c --conf-path=$HOME/.aria2/aria2.conf -D'
+alias dl='aria2c --conf-path=$HOME/.aria2/aria2.conf --enable-rpc=false --input-file="" --save-session=""'
+alias dlg='gopeed -C 64 -D $HOME/Downloads'
 
 alias ls='eza'
 _eza_opts="\
