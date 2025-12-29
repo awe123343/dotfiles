@@ -109,10 +109,12 @@ export FZF_ALT_C_OPTS=" \
 zsh-defer eval "$(fzf --zsh)"
 
 # Ruby
-# if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
-  # export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-  # export PATH=`gem environment gemdir`/bin:$PATH
-# fi
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+  export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
+fi
 
 export PATH=/Applications/Ghostty.app/Contents/MacOS:$PATH
 export PATH=/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH
