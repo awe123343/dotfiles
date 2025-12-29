@@ -115,6 +115,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# flutter
+export PATH="$DEV_DIR/flutter/bin:$PATH"
+
 # Rust/Cargo
 . "$HOME/.cargo/env"
 
