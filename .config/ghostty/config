@@ -1,6 +1,9 @@
 # --- Fonts ---
+# Use regular JetBrains Mono + Menlo(✔/✘) + Symbols Nerd Font Mono as fallback
+# Symbols Nerd Font Mono is optional as ghostty has built-in support for it already
 font-family = JetBrains Mono
-font-family = Symbols Nerd Font
+font-family = Menlo
+# font-family = Symbols Nerd Font
 font-size = 13
 adjust-cell-height = 15%
 
