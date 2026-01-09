@@ -1,0 +1,55 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[color]
+	ui = true
+[core]
+	editor = nvim
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = TwoDark
+[merge]
+	conflictStyle = zdiff3
+	tool = nvim
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[mergetool]
+	prompt = false
+	keepBackup = false
+[diff]
+	tool = nvim
+[difftool]
+	prompt = false
+[difftool "nvim"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+[mergetool "nvim"]
+	cmd = nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"
+[mergetool "cursor"]
+	cmd = cursor --wait --merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+[difftool "cursor"]
+	cmd = cursor --wait --diff \"$LOCAL\" \"$REMOTE\"
+[mergetool "vscode"]
+	cmd = code --wait --merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+[difftool "vscode"]
+	cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
+[mergetool "intellij"]
+	cmd = idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+[difftool "intellij"]
+	cmd = idea diff \"$LOCAL\" \"$REMOTE\"
+[mergetool "agy"]
+	cmd = agy --wait --merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+[difftool "agy"]
+	cmd = agy --wait --diff \"$LOCAL\" \"$REMOTE\"
