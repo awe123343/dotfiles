@@ -47,6 +47,8 @@ config.use_fancy_tab_bar = false
 config.switch_to_last_active_tab_when_closing_tab = true
 config.tab_bar_at_bottom = true
 
+config.freetype_load_target = 'Light'
+
 local font_name = 'JetBrainsMono Nerd Font'
 config.font = wezterm.font(font_name)
 config.font_size = 13.0
