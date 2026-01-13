@@ -53,3 +53,5 @@
 	trustExitCode = true
 [difftool "agy"]
 	cmd = agy --wait --diff \"$LOCAL\" \"$REMOTE\"
+[include]
+	path = ~/.gitconfig-user
