@@ -489,6 +489,10 @@ set -g @continuum-restore 'on'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 
+# Extended keys (CSI u) - pass Shift+Enter etc. through tmux
+set -s extended-keys on
+set -as terminal-features 'xterm*:extkeys'
+
 # Clear screen and scrollback history with Prefix + C-k
 bind C-k send-keys -R \; clear-history \; send-keys C-l
 
