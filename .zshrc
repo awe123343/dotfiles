@@ -54,7 +54,7 @@ setopt share_history          # share command history data
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
-setopt HIST_REDUCE_BLANKS
+unsetopt HIST_REDUCE_BLANKS
 
 # ============================================================================
 # Environment Variables
