@@ -3,6 +3,8 @@
 # Symbols Nerd Font Mono is optional as ghostty has built-in support for it already
 font-family = JetBrains Mono
 font-family = Menlo
+font-family = PingFang HK
+# font-family = Source Han Sans HK
 # font-family = Symbols Nerd Font
 font-size = 13
 adjust-cell-height = 15%
