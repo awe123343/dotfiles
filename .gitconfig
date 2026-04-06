@@ -55,3 +55,5 @@
 	cmd = agy --wait --diff \"$LOCAL\" \"$REMOTE\"
 [include]
 	path = ~/.gitconfig-user
+[push]
+	autoSetupRemote = true
