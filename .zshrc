@@ -196,6 +196,8 @@ alias lc="lsd -l $_lsd_opts"
 alias lca="lsd -Al $_lsd_opts"
 alias lct="lsd --tree --depth=2 $_lsd_opts"
 
+alias pre-commit='prek'
+
 # Powerlevel10k (legacy p9k config, overridden by ~/.p10k.zsh if exists)
 POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon ssh dir vcs status newline)
