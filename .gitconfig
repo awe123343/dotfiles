@@ -18,6 +18,7 @@
 [merge]
 	conflictStyle = zdiff3
 	tool = nvim
+	autoStash = true
 [pull]
 	rebase = true
 [fetch]
@@ -57,3 +58,6 @@
 	path = ~/.gitconfig-user
 [push]
 	autoSetupRemote = true
+[rebase]
+	autoSquash = true
+	autoStash = true
