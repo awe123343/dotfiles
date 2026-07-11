@@ -149,7 +149,7 @@ function _setup_fnm() {
   [[ -f "$ZSH_COMPLETIONS_CACHE/_fnm" ]] && source "$ZSH_COMPLETIONS_CACHE/_fnm"
   fnm completions --shell zsh >| "$ZSH_COMPLETIONS_CACHE/_fnm" &|
   # Env: must eval each time (node version can change)
-  eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
+  eval "$(fnm env --use-on-cd --version-file-strategy recursive --corepack-enabled --shell zsh)"
 }
 (( $+commands[fnm] )) && zsh-defer _setup_fnm
 
