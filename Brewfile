@@ -1,69 +1,136 @@
-tap "coursier/formulas"
+tap "coursier/formulas", trusted: true
+# Download with resuming and segmented downloading
 brew "aria2"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Yet another cross-platform graphical process/system monitor
 brew "bottom"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Console Matrix
 brew "cmatrix"
+# Generates code snapshots in various formats
 brew "codesnap"
+# Create and run Linux containers using lightweight virtual machines
 brew "container", link: false
+# GNU File, Shell, and Text utilities
 brew "coreutils"
+# More intuitive version of du in rust
 brew "dust"
+# GNU Transport Layer Security (TLS) Library
 brew "gnutls"
+# Validating, recursive, caching DNS resolver
 brew "unbound"
+# GNU Emacs text editor
 brew "emacs"
+# Modern, maintained replacement for ls
 brew "eza"
+# Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Fast and simple Node.js version manager
 brew "fnm"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Modern download manager that supports all platform
 brew "gopeed"
+# General-purpose data compression with high compression ratio
 brew "xz"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
 brew "gradle"
+# Like cURL, but for gRPC
 brew "grpcurl"
+# Improved top (interactive process viewer)
 brew "htop"
+# Command-line benchmarking tool
 brew "hyperfine"
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Java language specific implementation of the Language Server Protocol
 brew "jdtls"
+# Domain specific configuration language for defining JSON data
 brew "jsonnet"
+# Tool that can switch between kubectl contexts easily and create aliases
 brew "kubectx"
+# Kubernetes command-line interface
 brew "kubernetes-cli"
+# Template-free customization of Kubernetes YAML manifests
 brew "kustomize"
+# Simple terminal UI for git commands
 brew "lazygit"
+# Sophisticated file transfer program
 brew "lftp"
+# Linux virtual machines
 brew "lima"
+# Clone of ls with colorful output, file type icons, and more
 brew "lsd"
+# Package manager for the Lua programming language
 brew "luarocks"
+# Utility for directing compilation
 brew "make"
+# Mac App Store command-line interface
 brew "mas"
+# Java-based project management
 brew "maven"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Find/fix obsolete Nerd Font icons
 brew "nerdfix"
+# PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Modern replacement for ps written in Rust
 brew "procs"
+# Protocol buffers (Google's data interchange format)
 brew "protobuf"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.12"
+# Generic machine emulator and virtualizer
 brew "qemu"
+# SVG rendering tool and library
 brew "resvg"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# CLI proxy to minimize LLM token consumption
+brew "rtk"
+# Powerful, clean, object-oriented scripting language
 brew "ruby"
+# Cross-platform network monitoring terminal UI with deep packet inspection
 brew "rustnet"
+# 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+# Tail multiple Kubernetes pods & their containers
 brew "stern"
+# Terminal multiplexer
 brew "tmux"
+# Program that allows you to count code, quickly
 brew "tokei"
+# Executes a program periodically, showing output fullscreen
 brew "watch"
+# Internet file retriever
 brew "wget"
+# Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Launcher for Coursier
 brew "coursier/formulas/coursier"
+# Application uninstaller
 cask "appcleaner"
+# Tool to customise input devices and automate computer systems
 cask "bettertouchtool"
+# OpenAI's Codex desktop app for managing coding agents
 cask "codex-app"
 cask "container"
+# App to build and share containerised applications and microservices
 cask "docker-desktop"
 cask "font-0xproto-nerd-font"
 cask "font-3270-nerd-font"
@@ -134,29 +201,49 @@ cask "font-ubuntu-nerd-font"
 cask "font-ubuntu-sans-nerd-font"
 cask "font-victor-mono-nerd-font"
 cask "font-zed-mono-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Utility to hide menu bar items
 cask "hiddenbar"
+# Free and open-source media player
 cask "iina"
+# HTTP and GraphQL Client
 cask "insomnia"
+# Open-source screen recorder built with web technology
 cask "kap"
+# File archiver
 cask "keka"
+# Tool to manage the launchpad
 cask "launchpad-manager"
-cask "logi-options+"
-cask "logitech-g-hub"
+# Window manager
 cask "loop"
+# Mouse utility to add gesture functions and smooth scrolling to 3rd party mice
 cask "mac-mouse-fix"
+# Utility to open, create and modify archive files
 cask "maczip"
+# Htop on steroids
 cask "neohtop"
+# Full-screen slideshow program
 cask "phoenix-slides"
+# Window snapping tool
 cask "rectangle-pro"
+# Control windows and applications right from your trackpad
 cask "swish"
+# File transfer application
 cask "transmit"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
+# Gecko based web browser
 cask "zen"
+# OpenJDK distribution from Azul
 cask "zulu@11"
+# OpenJDK distribution from Azul
 cask "zulu@17"
+# OpenJDK distribution from Azul
 cask "zulu@21"
+# OpenJDK distribution from Azul
 cask "zulu@25"
+# OpenJDK distribution from Azul
 cask "zulu@8"
 mas "AdGuard for Safari", id: 1440147259
 mas "Evernote", id: 406056744
