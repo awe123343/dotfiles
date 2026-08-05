@@ -1,4 +1,5 @@
 tap "coursier/formulas", trusted: true
+tap "rjyo/moshi"
 # Download with resuming and segmented downloading
 brew "aria2"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -79,6 +80,10 @@ brew "make"
 brew "mas"
 # Java-based project management
 brew "maven"
+# Protocol buffers (Google's data interchange format)
+brew "protobuf"
+# Remote terminal application
+brew "mosh"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Find/fix obsolete Nerd Font icons
@@ -87,8 +92,6 @@ brew "nerdfix"
 brew "poppler"
 # Modern replacement for ps written in Rust
 brew "procs"
-# Protocol buffers (Google's data interchange format)
-brew "protobuf"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.12"
 # Generic machine emulator and virtualizer
@@ -123,6 +126,8 @@ brew "zellij"
 brew "zoxide"
 # Launcher for Coursier
 brew "coursier/formulas/coursier"
+# Portable daemon + CLI that bridges AI coding agents to the Moshi mobile app
+brew "rjyo/moshi/moshi-hook", trusted: true
 # Application uninstaller
 cask "appcleaner"
 # Tool to customise input devices and automate computer systems
@@ -256,7 +261,6 @@ mas "Microsoft Excel", id: 462058435
 mas "Microsoft OneNote", id: 784801555
 mas "Microsoft Outlook", id: 985367838
 mas "Microsoft PowerPoint", id: 462062816
-mas "Microsoft Word", id: 462054704
 mas "Notability", id: 360593530
 mas "Numbers", id: 409203825
 mas "OneDrive", id: 823766827

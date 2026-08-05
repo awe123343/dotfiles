@@ -28,6 +28,7 @@
 	keepBackup = false
 [diff]
 	tool = nvim
+	algorithm = histogram
 [difftool]
 	prompt = false
 [difftool "nvim"]
