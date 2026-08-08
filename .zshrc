@@ -133,6 +133,9 @@ esac
 # flutter
 export PATH="$DEV_DIR/flutter/bin:$PATH"
 
+# Added by JetBrains Context CLI installer
+export PATH="$PATH:$HOME/.jbcontext/bin"
+
 # Rust/Cargo
 . "$HOME/.cargo/env"
 
