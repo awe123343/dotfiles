@@ -133,8 +133,6 @@ esac
 # flutter
 export PATH="$DEV_DIR/flutter/bin:$PATH"
 
-# Added by JetBrains Context CLI installer
-export PATH="$PATH:$HOME/.jbcontext/bin"
 
 # Rust/Cargo
 . "$HOME/.cargo/env"
@@ -188,7 +186,7 @@ _eza_opts="\
 --group-directories-first \
 --sort=name \
 --time-style=long-iso \
---hyperlink"
+--hyperlink=auto"
 alias l="eza -lg $_eza_opts"
 alias la="eza -alg $_eza_opts"
 alias lt="eza -lg $_eza_opts --tree --level=2"
