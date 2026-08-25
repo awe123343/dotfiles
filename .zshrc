@@ -36,6 +36,9 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 
+# Oh My Zsh plugins loaded through Zim expect this cache root to be defined.
+typeset -g ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh"
+
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
