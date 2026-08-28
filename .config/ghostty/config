@@ -29,8 +29,9 @@ selection-foreground = #67b0e8
 selection-background = #485254
 
 # --- Window ---
-background-opacity = 0.7
-background-blur = macos-glass-regular
+background-opacity = 0.96
+background-blur = true
+# background-blur = macos-glass-regular
 # Add window padding (default is usually 0 or very small in some terminals).
 # Ghostty default is 2, bumping it up slightly gives more breathing room.
 window-padding-x = 8
