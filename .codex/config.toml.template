@@ -4,10 +4,13 @@
 model = "gpt-5.6-sol"
 review_model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
-network_access = "enabled"
+sandbox_mode = "workspace-write"
 approvals_reviewer = "guardian_subagent"
 service_tier = "fast"
 notify = ["$HOME/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+
+[sandbox_workspace_write]
+network_access = true
 
 [features]
 hooks = true
