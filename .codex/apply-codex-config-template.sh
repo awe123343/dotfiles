@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Expand the portable Codex config.toml.template with this machine's HOME and
 # atomically install it as $HOME/.codex/config.toml. The existing config is
 # saved as config.toml.bak before it is replaced.
 
-set -eu
+set -Eeuo pipefail
 umask 077
 
 script_name=${0##*/}
