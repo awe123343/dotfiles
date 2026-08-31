@@ -1,0 +1,194 @@
+# Template only: Codex does not expand `$HOME` in TOML values automatically.
+# On a local machine, run `apply-codex-config-template.sh` to expand `$HOME` and generate the real `config.toml`.
+
+model = "gpt-5.6-sol"
+review_model = "gpt-5.6-sol"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+approvals_reviewer = "guardian_subagent"
+service_tier = "fast"
+notify = ["$HOME/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+
+[sandbox_workspace_write]
+network_access = true
+
+[features]
+hooks = true
+  multi_agent = true
+  js_repl = false
+
+  [projects."$HOME/.config/nvim"]
+    trust_level = "trusted"
+
+  [projects."$HOME/Dev/playground"]
+    trust_level = "trusted"
+
+  [projects."$HOME/Dev/caveman"]
+    trust_level = "trusted"
+
+  [projects."$HOME"]
+    trust_level = "trusted"
+
+[tui]
+  theme = "Everblush"
+  status_line = ["model-with-reasoning", "context-remaining", "context-window-size", "git-branch", "five-hour-limit", "weekly-limit", "task-progress", "fast-mode"]
+
+    [tui.keymap.editor]
+      insert_newline = ["alt-enter"]
+
+  [tui.model_availability_nux]
+    "gpt-5.5" = 4
+    "gpt-5.6-sol" = 4
+
+  [mcp_servers.chrome-devtools]
+    command = "pnpm"
+    args = ["dlx", "chrome-devtools-mcp@latest"]
+    enabled = false
+
+  [mcp_servers.node_repl]
+args = []
+    command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
+    startup_timeout_sec = 120
+
+    [mcp_servers.node_repl.env]
+      NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+      NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+      NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
+      NODE_REPL_TRUSTED_CODE_PATHS = "$HOME/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+      CODEX_HOME = "$HOME/.codex"
+      BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+BROWSER_USE_TINYSKY_ENABLED = "0"
+      NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+      NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+      NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
+      BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+      BROWSER_USE_CODEX_APP_VERSION = "26.825.32147"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"$HOME/.codex/plugins/cache/openai-bundled/browser/26.825.32147/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+      SKY_CUA_SERVICE_PATH = "$HOME/.codex/computer-use/Codex Computer Use.app"
+      CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
+
+  [mcp_servers.computer-use]
+    command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
+    args = ["mcp"]
+    cwd = "."
+    enabled = false
+
+  [mcp_servers.idea]
+    url = "http://127.0.0.1:64342/stream"
+
+[mcp_servers.cua_repl]
+command = "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
+enabled = false
+
+  [plugins."browser-use@openai-bundled"]
+    enabled = true
+
+  [plugins."documents@openai-primary-runtime"]
+    enabled = true
+
+  [plugins."spreadsheets@openai-primary-runtime"]
+    enabled = true
+
+  [plugins."presentations@openai-primary-runtime"]
+    enabled = true
+
+  [plugins."computer-use@openai-bundled"]
+    enabled = true
+
+  [plugins."outlook-calendar@openai-curated"]
+    enabled = true
+
+  [plugins."teams@openai-curated"]
+    enabled = true
+
+  [plugins."sites@openai-bundled"]
+    enabled = true
+
+  [plugins."browser@openai-bundled"]
+    enabled = true
+
+  [plugins."visualize@openai-bundled"]
+    enabled = true
+
+  [plugins."pdf@openai-primary-runtime"]
+    enabled = true
+
+  [plugins."template-creator@openai-primary-runtime"]
+    enabled = true
+
+  [plugins."csharp-lsp@claude-plugins-official"]
+    enabled = true
+
+  [plugins."codex@openai-codex"]
+    enabled = true
+
+  [plugins."chrome@openai-bundled"]
+    enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[notice]
+  fast_default_opt_out = true
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "$HOME/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "$HOME/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[marketplaces.claude-plugins-official]
+last_updated = "2026-08-21T22:21:56Z"
+last_revision = "340e33aef211d95769d252324854497af871dafe"
+source_type = "git"
+source = "https://github.com/anthropics/claude-plugins-official.git"
+
+  [marketplaces.openai-codex]
+    last_updated = "2026-07-10T22:41:51Z"
+    last_revision = "db52e28f4d9ded852ab3942cea316258ae4ef346"
+    source_type = "git"
+    source = "https://github.com/openai/codex-plugin-cc.git"
+
+[desktop]
+  conversationDetailMode = "STEPS_PROSE"
+  ambient-suggestions-enabled = true
+  followUpQueueMode = "queue"
+  mac-menu-bar-enabled = false
+  show-context-window-usage = true
+  open-link-in-target-preference = "external-browser"
+  keepRemoteControlAwakeWhilePluggedIn = true
+
+[shell_environment_policy]
+  inherit = "core"
+
+  [shell_environment_policy.set]
+    CLAUDE_CODE_AUTO_COMPACT_WINDOW = "800000"
+    CLAUDE_CODE_MAX_RETRIES = "3"
+    NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "9230e2bd8b24b7ac7a0ba6774c64bf0d78ecdabbdd91d0ed627b02a587bae2df"
+
+    [[hooks.Stop]]
+    [[hooks.Stop.hooks]]
+      type = "command"
+      command = "printf '\\a' > /dev/tty"
+
+    [[hooks.PermissionRequest]]
+    [[hooks.PermissionRequest.hooks]]
+      type = "command"
+      command = "'/opt/homebrew/bin/moshi-hook' codex-hook"
+
+    [[hooks.SessionStart]]
+    [[hooks.SessionStart.hooks]]
+      type = "command"
+      command = "'/opt/homebrew/bin/moshi-hook' codex-hook"
+
+    [[hooks.Stop]]
+    [[hooks.Stop.hooks]]
+      type = "command"
+      command = "'/opt/homebrew/bin/moshi-hook' codex-hook"
+
+    [[hooks.UserPromptSubmit]]
+    [[hooks.UserPromptSubmit.hooks]]
+      type = "command"
+      command = "'/opt/homebrew/bin/moshi-hook' codex-hook"
