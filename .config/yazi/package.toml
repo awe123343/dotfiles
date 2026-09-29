@@ -1,0 +1,7 @@
+[plugin]
+deps = []
+
+[[flavor.deps]]
+use = "awe123343/everblush"
+rev = "36c4df5"
+hash = "94ba2ebb3be272b8993c3be846a38596"

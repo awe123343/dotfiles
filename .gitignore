@@ -7,3 +7,11 @@
 !/.codex/config.toml.template
 !/.codex/apply-codex-config-template.sh
 /.codex/config.toml
+
+# Track Yazi configuration and dependencies; keep installed flavors local.
+!/.config/
+!/.config/yazi/
+!/.config/yazi/yazi.toml
+!/.config/yazi/theme.toml
+!/.config/yazi/package.toml
+/.config/yazi/flavors/
