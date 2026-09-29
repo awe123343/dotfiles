@@ -1,3 +1,9 @@
 !.gitignore
 *
 **.*
+
+# Track the portable Codex template and generator, not the local config.
+!/.codex/
+!/.codex/config.toml.template
+!/.codex/apply-codex-config-template.sh
+/.codex/config.toml
