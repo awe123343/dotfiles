@@ -8,8 +8,12 @@
 !/.codex/apply-codex-config-template.sh
 /.codex/config.toml
 
-# Track Yazi configuration and dependencies; keep installed flavors local.
 !/.config/
+
+!/.config/rex/
+!/.config/rex/init.lua
+
+# Track Yazi configuration and dependencies; keep installed flavors local.
 !/.config/yazi/
 !/.config/yazi/yazi.toml
 !/.config/yazi/theme.toml
