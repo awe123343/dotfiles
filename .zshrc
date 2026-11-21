@@ -108,6 +108,7 @@ if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
 fi
 
 export PATH=/Applications/Ghostty.app/Contents/MacOS:$PATH
+export PATH="/Applications/Rex.app/Contents/Helpers/Rex Server.rex/Contents/MacOS:$PATH"
 export PATH=/Applications/IntelliJ\ IDEA.app/Contents/MacOS:$PATH
 # Added by Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"

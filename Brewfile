@@ -1,7 +1,12 @@
+tap "bufbuild/buf"
 tap "coursier/formulas", trusted: true
 tap "rjyo/moshi"
 # Download with resuming and segmented downloading
 brew "aria2"
+# General-purpose data compression with high compression ratio
+brew "xz"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Yet another cross-platform graphical process/system monitor
@@ -13,15 +18,15 @@ brew "cmatrix"
 # Generates code snapshots in various formats
 brew "codesnap"
 # Create and run Linux containers using lightweight virtual machines
-brew "container", link: false
+brew "container"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-buildx"
 # More intuitive version of du in rust
 brew "dust"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # GNU Emacs text editor
 brew "emacs"
 # Modern, maintained replacement for ls
@@ -36,14 +41,14 @@ brew "ffmpeg"
 brew "fnm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
+brew "gh"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Modern download manager that supports all platform
+# Multi protocol download manager
 brew "gopeed"
-# General-purpose data compression with high compression ratio
-brew "xz"
 # Open-source build automation tool based on the Groovy and Kotlin DSL
 brew "gradle"
 # Like cURL, but for gRPC
@@ -54,8 +59,12 @@ brew "htop"
 brew "hyperfine"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
+# Update of iperf: measures TCP, UDP, and SCTP bandwidth
+brew "iperf3"
 # Java language specific implementation of the Language Server Protocol
 brew "jdtls"
+# Git-compatible distributed version control system
+brew "jj"
 # Domain specific configuration language for defining JSON data
 brew "jsonnet"
 # Tool that can switch between kubectl contexts easily and create aliases
@@ -84,6 +93,8 @@ brew "maven"
 brew "protobuf"
 # Remote terminal application
 brew "mosh"
+# Media player based on MPlayer and mplayer2
+brew "mpv"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Find/fix obsolete Nerd Font icons
@@ -114,6 +125,10 @@ brew "stern"
 brew "tmux"
 # Program that allows you to count code, quickly
 brew "tokei"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
+# Compress/expand executable files
+brew "upx"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
@@ -124,16 +139,20 @@ brew "yazi"
 brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# The best way of working with Protocol Buffers.
+brew "bufbuild/buf/buf", trusted: true
 # Launcher for Coursier
-brew "coursier/formulas/coursier"
+brew "coursier/formulas/coursier", args: ["without-shell-completions"], trusted: true
 # Portable daemon + CLI that bridges AI coding agents to the Moshi mobile app
 brew "rjyo/moshi/moshi-hook", trusted: true
 # Application uninstaller
 cask "appcleaner"
 # Tool to customise input devices and automate computer systems
 cask "bettertouchtool"
-# OpenAI's Codex desktop app for managing coding agents
-cask "codex-app"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
+# Menu bar app for tracking agentic coding limits and usage
+cask "codexbar"
 cask "container"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
@@ -208,8 +227,8 @@ cask "font-victor-mono-nerd-font"
 cask "font-zed-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
-# Utility to hide menu bar items
-cask "hiddenbar"
+# Homebrew's official GUI
+cask "homebrew-app"
 # Free and open-source media player
 cask "iina"
 # HTTP and GraphQL Client
@@ -232,6 +251,10 @@ cask "neohtop"
 cask "phoenix-slides"
 # Window snapping tool
 cask "rectangle-pro"
+# Instant messaging application focusing on security
+cask "signal"
+# Code quality and security for terminal workflows, scripts, and AI agents
+cask "sonarqube-cli"
 # Control windows and applications right from your trackpad
 cask "swish"
 # File transfer application
@@ -261,6 +284,7 @@ mas "Microsoft Excel", id: 462058435
 mas "Microsoft OneNote", id: 784801555
 mas "Microsoft Outlook", id: 985367838
 mas "Microsoft PowerPoint", id: 462062816
+mas "Microsoft Word", id: 462054704
 mas "Notability", id: 360593530
 mas "Numbers", id: 409203825
 mas "OneDrive", id: 823766827
@@ -299,10 +323,12 @@ vscode "fill-labs.dependi"
 vscode "fireside21.cshtml-tm"
 vscode "firsttris.vscode-jest-runner"
 vscode "formulahendry.code-runner"
-vscode "fwcd.kotlin"
 vscode "golang.go"
 vscode "google.geminicodeassist"
 vscode "grapecity.gc-excelviewer"
+vscode "jetbrains.intellij-server"
+vscode "jetbrains.j2k-vscode"
+vscode "jetbrains.kotlin-server"
 vscode "jetbrains.resharper-code"
 vscode "jnbt.vscode-rufo"
 vscode "johnpapa.angular2"
@@ -310,7 +336,6 @@ vscode "kevinrose.vsc-python-indent"
 vscode "kokororin.vscode-phpfmt"
 vscode "malmaud.tmux"
 vscode "mangeshrex.everblush"
-vscode "mathiasfrohlich.kotlin"
 vscode "mathiasfrohlich.latexcompile"
 vscode "mechatroner.rainbow-csv"
 vscode "ms-azuretools.vscode-containers"
@@ -332,7 +357,6 @@ vscode "ms-toolsai.jupyter-renderers"
 vscode "ms-toolsai.vscode-jupyter-cell-tags"
 vscode "ms-toolsai.vscode-jupyter-slideshow"
 vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode.anycode-kotlin"
 vscode "ms-vscode.cpptools"
 vscode "ms-vscode.powershell"
 vscode "ms-vsliveshare.vsliveshare"
@@ -367,7 +391,7 @@ vscode "yzane.markdown-pdf"
 vscode "yzhang.markdown-all-in-one"
 cargo "cargo-edit"
 uv "black"
-uv "pre-commit"
+uv "prek"
 uv "ruff"
 uv "ty"
 npm "corepack"
