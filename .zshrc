@@ -39,8 +39,78 @@ fi
 # Oh My Zsh plugins loaded through Zim expect this cache root to be defined.
 typeset -g ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh"
 
+# Completions/init cache directory
+ZSH_COMPLETIONS_CACHE="$HOME/.cache/zsh/completions"
+[[ -d "$ZSH_COMPLETIONS_CACHE" ]] || mkdir -p "$ZSH_COMPLETIONS_CACHE"
+
+# Startup init caches. Avoids exec'ing Homebrew (ad-hoc signed) binaries on
+# the startup path: when their Gatekeeper verdict isn't cached, syspolicyd
+# blocks exec on an online notarization lookup, which hangs new shells on
+# slow networks.
+#
+# Known limits (accepted):
+# - A refresh that fails on a cold cache (generator error, unwritable cache
+#   dir) isn't retried; the tool loads from the next shell that succeeds.
+# - A cache published while idle at the first prompt loads at the next
+#   prompt, not immediately.
+# - Caches are keyed by tool name only, not binary identity or settings baked
+#   in at generation time (e.g. zoxide's _ZO_* vars); a mismatch lasts until
+#   the background refresh rewrites the cache for the next shell.
+
+# Regenerate cache file $1 from command $2... in the background. Each run
+# writes its own temp file; only non-empty output replaces the cache. Fully
+# detached, so callers capturing `zsh -ic` output don't wait on it.
+function _zcache_refresh() {
+  local f=$1; shift
+  {
+    local t
+    t=$(mktemp "$f.XXXXXX") || exit
+    "$@" >| $t && [[ -s $t ]] && mv -f $t $f || rm -f $t
+  } </dev/null >/dev/null 2>&1 &|
+}
+
+# Tools whose cache was cold at startup; loaded at a later prompt once the
+# background refresh has published their cache.
+autoload -Uz add-zsh-hook
+typeset -ga _zcache_pending
+function _zcache_load_pending() {
+  local n f
+  for n in $_zcache_pending; do
+    f="$ZSH_COMPLETIONS_CACHE/init_$n"
+    [[ -s $f ]] && source $f && _zcache_pending=(${_zcache_pending:#$n})
+  done
+  (( $#_zcache_pending )) || add-zsh-hook -d precmd _zcache_load_pending
+}
+
+# Source tool $1's cached init output, refresh it in the background. A cold
+# cache never blocks: the tool loads at the first prompt after it's ready.
+function _zcache() {
+  (( $+commands[$1] )) || return
+  local f="$ZSH_COMPLETIONS_CACHE/init_$1"
+  if [[ -s $f ]]; then
+    source $f
+  else
+    _zcache_pending+=($1)
+    add-zsh-hook precmd _zcache_load_pending
+  fi
+  _zcache_refresh $f command "$@"
+}
+
+# omz git plugin runs `git version` while loading; answer it from cache.
+# Known limit: empty on a cold cache, so omz assumes a modern git for that
+# one shell (fine for Homebrew git).
+function git() {
+  if [[ $1 == version ]]; then
+    [[ -s $ZSH_COMPLETIONS_CACHE/git_version ]] && print -r -- "$(<$ZSH_COMPLETIONS_CACHE/git_version)"
+  else
+    command git "$@"
+  fi
+}
+
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
+unfunction git
+_zcache_refresh $ZSH_COMPLETIONS_CACHE/git_version command git version
 
 # History settings (Override Zim defaults)
 HISTSIZE=1000000
@@ -97,12 +167,15 @@ export FZF_ALT_C_OPTS=" \
   --icons {} 2>/dev/null || ls -la {}'"
 
 # fzf keybindings and completion (deferred)
-zsh-defer eval "$(fzf --zsh)"
+zsh-defer _zcache fzf --zsh
 
 # Ruby
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
   export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
+  # Gem bin dir without exec'ing gem: $GEM_HOME, else Homebrew Ruby's ABI dir.
+  # Known limit: ignores gemrc `gemhome`; :a doesn't resolve symlinks before
+  # collapsing "..", unlike RubyGems.
+  () { path=(${${GEM_HOME:-/opt/homebrew/lib/ruby/gems/$1}:a}/bin $path) } /opt/homebrew/opt/ruby/lib/ruby/[0-9]*(N[-1]:t)
   export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
   export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
 fi
@@ -144,10 +217,6 @@ export PATH="$DEV_DIR/flutter/bin:$PATH"
 # uv
 . "$HOME/.local/bin/env"
 
-# Completions cache directory
-ZSH_COMPLETIONS_CACHE="$HOME/.cache/zsh/completions"
-[[ -d "$ZSH_COMPLETIONS_CACHE" ]] || mkdir -p "$ZSH_COMPLETIONS_CACHE"
-
 # fnm (env deferred, completions cached)
 function _setup_fnm() {
   # Completions: source cache, regenerate in background
@@ -159,7 +228,7 @@ function _setup_fnm() {
 (( $+commands[fnm] )) && zsh-defer _setup_fnm
 
 # zoxide (deferred)
-zsh-defer eval "$(zoxide init zsh)"
+zsh-defer _zcache zoxide init zsh
 
 # uv/uvx (completions cached, regenerate in background)
 function _setup_uv() {
