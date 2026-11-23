@@ -19,12 +19,6 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# macOS uses gdircolors (required by zsh-dircolors-solarized)
-# Use function instead of alias (aliases don't work in scripts/functions)
-if (( $+commands[gdircolors] )); then
-  dircolors() { gdircolors "$@" }
-fi
-
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \

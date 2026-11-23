@@ -82,6 +82,3 @@ zmodule zsh-users/zsh-autosuggestions
 
 # Fish-like syntax highlighting for Zsh (must be after completion)
 zmodule zsh-users/zsh-syntax-highlighting
-
-# Solarized dircolors (requires dircolors/gdircolors)
-zmodule joel-porquet/zsh-dircolors-solarized
