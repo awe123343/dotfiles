@@ -215,8 +215,11 @@ export PATH="$DEV_DIR/flutter/bin:$PATH"
 function _setup_fnm() {
   # Completions: source cache, regenerate in background
   [[ -f "$ZSH_COMPLETIONS_CACHE/_fnm" ]] && source "$ZSH_COMPLETIONS_CACHE/_fnm"
-  fnm completions --shell zsh >| "$ZSH_COMPLETIONS_CACHE/_fnm" &|
+  _zcache_refresh "$ZSH_COMPLETIONS_CACHE/_fnm" command fnm completions --shell zsh
   # Env: must eval each time (node version can change)
+  # Known limit: this execs fnm in every shell (it creates a per-shell
+  # multishell link and applies the cwd's version file), so a cold Gatekeeper
+  # verdict for fnm still blocks input once after a reboot or fnm upgrade.
   eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
 }
 (( $+commands[fnm] )) && zsh-defer _setup_fnm
@@ -228,8 +231,8 @@ zsh-defer _zcache zoxide init zsh
 function _setup_uv() {
   [[ -f "$ZSH_COMPLETIONS_CACHE/_uv" ]] && source "$ZSH_COMPLETIONS_CACHE/_uv"
   [[ -f "$ZSH_COMPLETIONS_CACHE/_uvx" ]] && source "$ZSH_COMPLETIONS_CACHE/_uvx"
-  uv generate-shell-completion zsh >| "$ZSH_COMPLETIONS_CACHE/_uv" &|
-  uvx --generate-shell-completion zsh >| "$ZSH_COMPLETIONS_CACHE/_uvx" &|
+  _zcache_refresh "$ZSH_COMPLETIONS_CACHE/_uv" command uv generate-shell-completion zsh
+  _zcache_refresh "$ZSH_COMPLETIONS_CACHE/_uvx" command uvx --generate-shell-completion zsh
 }
 (( $+commands[uv] )) && zsh-defer _setup_uv
 
