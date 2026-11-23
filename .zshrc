@@ -221,6 +221,10 @@ function _setup_fnm() {
   # multishell link and applies the cwd's version file), so a cold Gatekeeper
   # verdict for fnm still blocks input once after a reboot or fnm upgrade.
   eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
+  # fnm never removes its per-shell multishell links (unmerged upstream fixes:
+  # Schniz/fnm#865, #1480). They pile up but are harmless; clear old ones by
+  # hand when needed (a shell open longer than that loses node until `fnm use`):
+  #   fd -t l --changed-before 7d . ~/.local/state/fnm_multishells -X rm
 }
 (( $+commands[fnm] )) && zsh-defer _setup_fnm
 
